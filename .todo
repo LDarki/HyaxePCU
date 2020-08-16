@@ -1,0 +1,9 @@
+[/] Agregar clases principales
+[+] Organización del código principal
+[/] Controlador - Modelo y Vista del login
+[] Controlador - Modelo y Vista del inicio
+[+] Evitar Directory Listing
+[] Poner sesiones con limite de vida de 2 hrs (en 2 horas tenes que logear de nuevo)
+[] CSRF Token
+[] Uso de namespace y clases
+[] Funciones básicas del PCU (Entre ellas editar la config de la cuenta...)
