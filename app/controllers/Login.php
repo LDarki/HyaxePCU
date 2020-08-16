@@ -8,19 +8,16 @@ class Login extends Controller {
             $user = $this->getCurrentUser()->login($uname, $pass);
             if($user == 0) // si no pudo logear
             {
-                $user = $this->getCurrentUser();
-                return $this -> view('login', array('name' => "Desconocido", 'notification' => "Error: Contraseña o Nombre de Usuario inválido"));
+                header("Location: ./login");
             }
             else // si pudo logear
             {
                 $user = $this->getCurrentUser();
                 header("Location: ./");
-                return $this -> view('index', array('name' => $user->name, 'userData' => $user->data, 'notification' => "Ingresaste sesión correctamente"));
             }
         }
         else 
         {
-            $usuario = $this->getCurrentUser();
             return $this -> view('login', array('name' => "Desconocido", 'notification' => "Estás por ingresar al Panel de Control de Usuario."));
         }
     }

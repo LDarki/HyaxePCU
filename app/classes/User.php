@@ -5,7 +5,6 @@ class User {
     public $mail;
     public $data = array();
     protected $db;
-    protected static $instance;
 
     public function __construct() 
     {
@@ -15,12 +14,14 @@ class User {
 
     public function isLogged() : bool
     {
-        if($_SESSION["Logged"] == 1) return 1;
+        if($_SESSION["Logged"] == 1 && !is_null($this->name)) return 1;
         return 0;
     }
 
-    public function login($name, $pass)
+    public function login($nameD, $passD)
     {
+        $name = $this->Xss->escape($nameD);
+        $pass = $this->Xss->escape($passD);
         $query = $this->db->run("SELECT password FROM users WHERE name = ?", [$name])->fetch(PDO::FETCH_ASSOC);
         if(password_verify($pass, $query["password"]))
         {
@@ -28,6 +29,7 @@ class User {
             $char = $this->db->run("SELECT * FROM characters WHERE user_id=?", [$userdata["id"]])->fetch(PDO::FETCH_ASSOC);
             $this->name = $name;
             $this->mail = $userdata["email"];
+            $_SESSION["Logged"] = 1;
             $this->data = array(
                 'character' => 
                     array(
@@ -54,7 +56,7 @@ class User {
         unset($this->mail);
         unset($this->data);
         unset($this->db);
-        unset(self::$instance);
+        $_SESSION["Logged"] = 0;
         return 1;
     }
 }
