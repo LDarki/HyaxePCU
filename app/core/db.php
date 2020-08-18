@@ -1,4 +1,7 @@
 <?php 
+
+defined('_ADF') or exit('Restricted Access');
+
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'hyaxev');
 define('DB_USER', 'root');

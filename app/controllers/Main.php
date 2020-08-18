@@ -1,8 +1,11 @@
 <?php
+
+defined('_ADF') or exit('Restricted Access');
+
 class Main extends Controller {
     public function index() {
-        if($this->getCurrentUser()->isLogged()) $this -> view('index', array('name' => "Desconocido"));
-        else return $this -> view('login', array('name' => "Desconocido", 'notification' => "Estás por ingresar al Panel de Control de Usuario."));
+        if(User::isLogged()) return $this -> view('index', array('name' => $_SESSION["username"], 'notification' => NULL, 'notificationType' => 'info'));
+        else return header("Location: ./login");
     }
 }
 ?>

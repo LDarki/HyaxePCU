@@ -2,51 +2,64 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>CTD</title>
-    <link href='./assets/css/index.css' rel="stylesheet"></link>
-    <link href="./assets/css/font-awesome.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+    <meta name="description" content="Hyaxe V | PCU">
+    <meta name="author" content="LDarki">
+
+    <title>Hyaxe V | PCU</title>
+
+    <link rel="stylesheet" href="./assets/css/font-awesome.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+
 </head>
+<?php
+require_once("./views/inc/navbar.php");
+?>
+
 <body>
-<div class="app">
-    <div class="topMenu">
-    <div class="group">
-        <div class="logo">
-            
-        </div>
-        <div class="btnGroup">
-            <label for="select_toggle" onclick="">Ayuda</label>
-        </div>
-    </div>
-    <div class="gameTitle">Configuración</div>
-    </div>
-    <div class="content">
-    <div class="editor">
-        <div class="rightTab">
+    <div class="container-fluid">
+        <div class="row">
 
-        </div>
-        <div class="canvasWrapper">
+            <div class="col-md-3">
 
-        </div>
-    </div>
-    </div>
-    <div class="footer">
-        <div class="group">
-            <div class="btnGroup">
-                <label onclick="">
-                    <i class="fa fa-power-off"></i>
-                </label>
             </div>
-            <div>LDarki</div>
-            <div>Total Played: 92 Days</div>
+
+            <div class="col-md-6">
+
+                <h1 class="my-4"></h1>
+
+                <div class="card mb-4">
+                    <img class="card-img-top" src="./assets/img/wallpaper.jpg">
+                    <div class="card-body">
+                        <h2 class="card-title">Primer post</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+                        <a href="https://bootsnipp.com/fullscreen/6Xa15" class="btn btn-primary">Leer más →</a>
+                    </div>
+                    <div class="card-footer">
+                        Publicado el 16 de Agosto, 2020
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+            </div>
         </div>
-    <div class="group">
-        <div>Dinero: 2500000$</div>
-        <div>Banco: 2500000$</div>
-    </div>
-    </div>
-</div>
+
+        <script src="./assets/js/index.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+        <?php
+        if (isset($data) && !is_null($data["notification"])) {
+            echo '<script>document.addEventListener("DOMContentLoaded", () => Notification.show("' . $data["notification"] . '", "' . $data["notificationType"] . '"));</script>';
+        }
+        ?>
+
 </body>
+
 </html>

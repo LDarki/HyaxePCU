@@ -1,5 +1,8 @@
 <?php
-class XSS {
+
+defined('_ADF') or exit('Restricted Access');
+
+class Xss {
     public function __construct() {}
     public function __clone() {}
 

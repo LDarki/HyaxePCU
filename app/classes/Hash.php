@@ -1,5 +1,8 @@
 <?php
-class Hash
+
+defined('_ADF') or exit('Restricted Access');
+
+class HashingStr
 {
     public function eobf($string, $method = 1) // esta funcion lo que hace es obfuscar y deobfuscar las strings
     { // (va a ser util para la parte de los tokens)
