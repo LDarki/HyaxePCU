@@ -39,8 +39,7 @@ class User {
 
         if (time() > ($_SESSION['lastaccess'] + 7200))
         {
-            self::destroy();
-            return false;
+            session_regenerate_id(1);
         }
         else
         {
@@ -101,7 +100,6 @@ class User {
 
     public static function destroy()
     {
-        unset($data);
         session_unset();
         session_destroy();
         return 1;

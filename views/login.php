@@ -26,6 +26,7 @@
           <div class="form-group">
             <input type="text" name="username" class="form-control" placeholder="Nombre de Usuario" required>
           </div>
+          <input type="hidden" name="csrf_token" value="<?=$data["csrfToken"]?>">
           <div class="form-group">
             <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
           </div>
