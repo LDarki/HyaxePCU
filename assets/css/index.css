@@ -66,17 +66,53 @@ label:focus,
   color: #ffffff;
 }
 
-nav, .navbar {
-    background: #FFFFFF !important;
-    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.35) !important;
-    -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.35) !important;
-    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.35) !important;
+.sub-active {
+  border-bottom: 2px solid #007be8 !important;
+  border-radius: 0px 0px 0px 0px !important;
+  color: #007bff !important;
 }
-
+.navbar-sub {
+  padding-bottom: 0px !important;
+  font-weight: 400 !important;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.35);
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.35);
+}
+.sub > .nav-item {
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
+.sub > .nav-item > .nav-link {
+  color: #8795a1 !important;
+}
 .navbar-brand {
-    font-weight: bold;
+  font-weight: 700 !important;
+}
+.block {
+  border: 1px solid #D6DBDF !important;
+  border-radius: 0px 0px 0px 0px !important;
+}
+.center {
+  border-left: 1px solid #D6DBDF !important;
+  border-right: 1px solid #D6DBDF !important;
+}
+.nav-tabs, .tab-content {
+  background: #FFF !important;
+  border-top: 2px !important;
 }
 
-nav * {
-    color: #000000 !important;
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  border-color: #dee2e6 #dee2e6 #fff !important;
+  border: 0px solid !important;
+  border-bottom: 2px solid #007be8 !important;
+  color: #007bff !important;
+}
+
+.nav-tabs .nav-link {
+  border: 0px solid transparent !important;
+  border-top-left-radius: 0rem !important;
+  border-top-right-radius: 0rem !important;
+  color: #8795a1 !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
 }
