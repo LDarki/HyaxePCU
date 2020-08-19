@@ -27,9 +27,6 @@ require_once("./views/inc/navbar.php");
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#menu1">Stats</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#menu2">Ni puta idea</a>
-          </li>
         </ul>
 
         <div class="tab-content block">
@@ -38,13 +35,15 @@ require_once("./views/inc/navbar.php");
               <div class="col-sm-12">
                 <div class="row text-center">
                   <div class="col-sm-4">
-                    <h1 class="price"><span class="cur">U$D</span><?=$data["userData"]["bank"]?></h1>
+                    <h1 class="price"><span class="cur">U$D</span><?= $data["userData"]["bank"] ?></h1>
                     <span class="sub-price">Débito/Crédito</span>
                   </div>
                   <div class="col-sm-4">
+                    <h1 class="price"><span class="cur">HC</span><?= $data["userData"]["hycoins"] ?></h1>
+                    <span class="sub-price">HyCoins</span>
                   </div>
                   <div class="col-sm-4">
-                    <h1 class="price"><span class="cur">U$D</span><?=$data["userData"]["money"]?></h1>
+                    <h1 class="price"><span class="cur">U$D</span><?= $data["userData"]["money"] ?></h1>
                     <span class="sub-price">Efectivo</span>
                   </div>
                 </div>
@@ -53,11 +52,22 @@ require_once("./views/inc/navbar.php");
           </div>
 
           <div class="tab-pane container fade stats" id="menu1">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-          </div>
-
-          <div class="tab-pane container fade stats" id="menu2">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <div class="row">
+              <div class="col-md-6">
+                Dni: <?= $data["userData"]["dni"] ?><br />
+                Edad: <?= $data["userData"]["age"] ?><br />
+                Nivel: <?= $data["userData"]["level"] ?><br />
+                Exp: <?= $data["userData"]["exp"] ?><br />
+              </div>
+              <div class="col-md-6">
+                Vida: <?= $data["userData"]["health"] ?><br />
+                Armadura: <?= $data["userData"]["armour"] ?><br />
+                Ultima entrada: <?= $data["userData"]["lastLogin"] ?><br />
+                Faccion: <?= $data["userData"]["faction"]["name"] ?><br />
+                Rango: <?= $data["userData"]["faction"]["rank"] ?><br />
+              </div>
+            </div>
+            </p>
           </div>
 
         </div>

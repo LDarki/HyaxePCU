@@ -85,9 +85,19 @@ label:focus,
 .sub > .nav-item > .nav-link {
   color: #8795a1 !important;
 }
+
+.bg-custom {
+  background: #C70039 !important;
+}
+
 .navbar-brand {
   font-weight: 700 !important;
 }
+
+.navbar-toggler {
+  margin-bottom: 5px !important;
+}
+
 .block {
   border: 1px solid #D6DBDF !important;
   border-radius: 0px 0px 0px 0px !important;

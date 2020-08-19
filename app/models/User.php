@@ -39,7 +39,7 @@ class User {
 
         if (time() > ($_SESSION['lastaccess'] + 7200))
         {
-            session_regenerate_id(1);
+            self::updateData();
         }
         else
         {
@@ -57,8 +57,9 @@ class User {
 
         if(password_verify($pass, $query["password"]))
         {
-            $userdata = $db->run("SELECT id, email FROM users WHERE name = ?", [$name])->fetch(PDO::FETCH_ASSOC);
+            $userdata = $db->run("SELECT id, email, admin FROM users WHERE name = ?", [$name])->fetch(PDO::FETCH_ASSOC);
             $char = $db->run("SELECT * FROM characters WHERE user_id=?", [$userdata["id"]])->fetch(PDO::FETCH_ASSOC);
+            $fac = $db->run("SELECT * FROM factions WHERE id=?", [$char["faction"]])->fetch(PDO::FETCH_ASSOC);
 
             $_SESSION["username"] = Xss::escape($name);
             $_SESSION["mail"] = Xss::escape($userdata["email"]);
@@ -78,6 +79,12 @@ class User {
             $_SESSION['useragent'] = $_SERVER['HTTP_USER_AGENT'];
             $_SESSION['lastaccess'] = time();
 
+            if(!isset($fac["name"]) || is_null($fac["name"])) $fac["name"] = "Ninguna";
+
+            $facRank = $fac["rank".$char["rank"]];
+
+            if($char["rank"] == 0) $facRank = "Ninguno";
+
             $_SESSION["data"] = array(
                 'character' => 
                     array(
@@ -88,14 +95,76 @@ class User {
                         'money' => $char["money"],
                         'bank' => $char["bank"],
                         'hycoins' => $char["hycoin"],
-                        'faction' => $char["faction"],
+                        'faction' => array(
+                            'name' => $fac["name"],
+                            'rank' => $facRank
+                        ),
+                        'health' => $char["health"],
+                        'armour' => $char["armour"],
                         'dni' => $char["dni"],
-                        'age' => $char["age"]
+                        'age' => $char["age"],
+                        'admin' => $userdata["admin"]
                     )
             );
             return 1;
         }
         return 0;
+    }
+
+    public static function updateData()
+    {
+        if(!self::isLogged()) return 0;
+        session_regenerate_id(1);
+        $db = DB::instance();
+
+        $name = Xss::escape($_SESSION["username"]);
+
+        $userdata = $db->run("SELECT id, email, admin FROM users WHERE name = ?", [$name])->fetch(PDO::FETCH_ASSOC);
+        $char = $db->run("SELECT * FROM characters WHERE user_id=?", [$userdata["id"]])->fetch(PDO::FETCH_ASSOC);
+        $fac = $db->run("SELECT * FROM factions WHERE id=?", [$char["faction"]])->fetch(PDO::FETCH_ASSOC);
+
+        $ip = "";
+
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        $_SESSION["ip"] = $ip;
+        $_SESSION['useragent'] = $_SERVER['HTTP_USER_AGENT'];
+        $_SESSION['lastaccess'] = time();
+
+        if(!isset($fac["name"]) || is_null($fac["name"])) $fac["name"] = "Ninguna";
+
+        $facRank = $fac["rank".$char["rank"]];
+
+        if($char["rank"] == 0) $facRank = "Ninguno";
+
+        $_SESSION["data"] = array(
+            'character' => 
+                array(
+                    'name' => $char["name"],
+                    'exp' => $char["exp"],
+                    'level' => $char["level"],
+                    'lastLogin' => $char["last_login_date"],
+                    'money' => $char["money"],
+                    'bank' => $char["bank"],
+                    'hycoins' => $char["hycoin"],
+                    'faction' => array(
+                        'name' => $fac["name"],
+                        'rank' => $facRank
+                    ),
+                    'health' => $char["health"],
+                    'armour' => $char["armour"],
+                    'dni' => $char["dni"],
+                    'age' => $char["age"],
+                    'admin' => $userdata["admin"]
+                )
+        );
+        return 1;
     }
 
     public static function destroy()
