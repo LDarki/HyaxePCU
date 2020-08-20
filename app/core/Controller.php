@@ -5,6 +5,7 @@ defined('_ADF') or exit('Restricted Access');
 require_once './app/classes/Xss.php';
 require_once './app/classes/Csrf.php';
 require_once './app/models/User.php';
+require_once './app/models/Announcements.php';
 
 class Controller {
     public $xss;

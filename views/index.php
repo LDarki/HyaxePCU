@@ -28,14 +28,14 @@ require_once("./views/inc/navbar.php");
                 <h1 class="my-4"></h1>
 
                 <div class="card mb-4">
-                    <img class="card-img-top" src="./assets/img/wallpaper.jpg">
+                    <img class="card-img-top" src="<?=$data["notice"]["imagen"]?>" style="max-height: 600px;">
                     <div class="card-body">
-                        <h2 class="card-title">Primer post</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        <a href="https://bootsnipp.com/fullscreen/6Xa15" class="btn btn-primary">Leer más →</a>
+                        <h2 class="card-title"><?=$data["notice"]["titulo"]?></h2>
+                        <p class="card-text"><?=$data["notice"]["desc"]?></p>
+                        <a href="./notice?id=<?=$data["notice"]["id"]?>" class="btn btn-primary">Leer más →</a>
                     </div>
                     <div class="card-footer">
-                        Publicado el 16 de Agosto, 2020
+                        Publicado el <?=$data["notice"]["fecha"]?>
                     </div>
                 </div>
             </div>

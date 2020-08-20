@@ -54,17 +54,44 @@ require_once("./views/inc/navbar.php");
           <div class="tab-pane container fade stats" id="menu1">
             <div class="row">
               <div class="col-md-6">
-                Dni: <?= $data["userData"]["dni"] ?><br />
-                Edad: <?= $data["userData"]["age"] ?><br />
-                Nivel: <?= $data["userData"]["level"] ?><br />
-                Exp: <?= $data["userData"]["exp"] ?><br />
+                <div class="responsive">
+                  <table class="table table-striped table-bordered">
+                    <tbody>
+                      <tr>
+                        <td>Dni: <?= $data["userData"]["dni"] ?></td>
+                      </tr>
+                      <tr>
+                        <td>Edad: <?= $data["userData"]["age"] ?></td>
+                      </tr>
+                      <tr>
+                        <td>Nivel: <?= $data["userData"]["level"] ?></td>
+                      </tr>
+                      <tr>
+                        <td>Exp: <?= $data["userData"]["exp"] ?></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <div class="col-md-6">
-                Vida: <?= $data["userData"]["health"] ?><br />
-                Armadura: <?= $data["userData"]["armour"] ?><br />
-                Ultima entrada: <?= $data["userData"]["lastLogin"] ?><br />
-                Faccion: <?= $data["userData"]["faction"]["name"] ?><br />
-                Rango: <?= $data["userData"]["faction"]["rank"] ?><br />
+                <div class="responsive">
+                  <table class="table table-striped table-bordered box-shadow--6dp">
+                    <tbody>
+                      <tr>
+                        <td>Vida: <?= $data["userData"]["health"] ?></td>
+                      </tr>
+                      <tr>
+                        <td>Armadura: <?= $data["userData"]["armour"] ?></td>
+                      </tr>
+                      <tr>
+                        <td>Ultima entrada: <?= $data["userData"]["lastLogin"] ?></td>
+                      </tr>
+                      <tr>
+                        <td>Faccion: <?= $data["userData"]["faction"]["name"] ?> - Rango: <?= $data["userData"]["faction"]["rank"] ?></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
             </p>

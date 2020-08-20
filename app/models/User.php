@@ -111,6 +111,22 @@ class User {
         return 0;
     }
 
+    public static function getRank()
+    {
+        switch($_SESSION["data"]["character"]["admin"])
+        {
+            case 7: return "Administrador";
+            case 6: return "Manager";
+            case 5: return "Programador";
+            case 4: return "Moderador Global";
+            case 3: return "Moderador";
+            case 2: return "Soporte";
+            case 1: return "Ayudante";
+            case 0: return "Usuario";
+            default: return "Usuario";
+        }
+    }
+
     public static function updateData()
     {
         if(!self::isLogged()) return 0;

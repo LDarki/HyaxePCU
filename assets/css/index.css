@@ -55,8 +55,8 @@ label:focus,
 }
 
 .toast--info {
-  background: rgba(199, 0, 57, .3);
-  border-color: rgba(199, 0, 57, .3);
+  background: rgba(199, 0, 57, 0.3);
+  border-color: rgba(199, 0, 57, 0.3);
   color: #ffffff;
 }
 
@@ -74,9 +74,9 @@ label:focus,
 .navbar-sub {
   padding-bottom: 0px !important;
   font-weight: 400 !important;
-  -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.35);
-  -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.35);
-  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.35);
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.35);
 }
 .sub > .nav-item {
   padding-right: 10px !important;
@@ -87,7 +87,7 @@ label:focus,
 }
 
 .bg-custom {
-  background: #C70039 !important;
+  background: #c70039 !important;
 }
 
 .navbar-brand {
@@ -99,19 +99,21 @@ label:focus,
 }
 
 .block {
-  border: 1px solid #D6DBDF !important;
+  border: 1px solid #d6dbdf !important;
   border-radius: 0px 0px 0px 0px !important;
 }
 .center {
-  border-left: 1px solid #D6DBDF !important;
-  border-right: 1px solid #D6DBDF !important;
+  border-left: 1px solid #d6dbdf !important;
+  border-right: 1px solid #d6dbdf !important;
 }
-.nav-tabs, .tab-content {
-  background: #FFF !important;
+.nav-tabs,
+.tab-content {
+  background: #fff !important;
   border-top: 2px !important;
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
   border-color: #dee2e6 #dee2e6 #fff !important;
   border: 0px solid !important;
   border-bottom: 2px solid #007be8 !important;
