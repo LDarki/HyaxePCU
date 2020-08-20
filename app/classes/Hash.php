@@ -4,7 +4,7 @@ defined('_ADF') or exit('Restricted Access');
 
 class HashingStr
 {
-    public function eobf($string, $method = 1) // esta funcion lo que hace es obfuscar y deobfuscar las strings
+    public static function eobf($string, $method = 1) // esta funcion lo que hace es obfuscar y deobfuscar las strings
     { // (va a ser util para la parte de los tokens)
         if ($method) {
             return base64_encode(str_rot13(gzdeflate($string, 9)));
@@ -13,7 +13,7 @@ class HashingStr
         }
     }
 
-     public function ehtml($strarr) { // para limpiar el string
+     public static function ehtml($strarr) { // para limpiar el string
         if(is_array($strarr)) {
             foreach($strarr as $key => $val) {
                 $vars[$key] = htmlentities($val);

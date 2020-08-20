@@ -4,8 +4,8 @@
 [+] Evitar Directory Listing
 [+] Poner sesiones con limite de vida de 2 hrs (en 2 horas tenes que logear de nuevo)
 [+] CSRF Token
-[] Uso de namespace y clases
+[/] Uso de namespace y clases
 [] Funciones básicas del PCU (Entre ellas editar la config de la cuenta...)
-[] Poner un token de acceso (expiración de 2 hrs)
+[/] Poner un token de acceso (expiración de 2 hrs)
 [] Mejorar el front-end
-[] Pentest para ver el tema de seguridad
+[/] Pentest para ver el tema de seguridad

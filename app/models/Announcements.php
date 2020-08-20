@@ -17,5 +17,16 @@ class Announcements {
         $notice["titulo"] = XSS::escape2($notice["titulo"]);
         return $notice;
     }
+    public static function addNotice($image, $description, $title) : bool
+    {
+        $date = getdate();
+        $fecha = $date["mday"]."/".$date["mon"]."/".$date["year"];
+        $img = XSS::escapeURL($image);
+        $desc = XSS::escape2($description);
+        $titleF = XSS::escape2($title);
+        $db = DB::instance();
+        $db->run("INSERT INTO pcu_anuncios (fecha, imagen, desc, titulo) VALUES (?, ?, ?, ?)", [$fecha, $img, $desc, $titleF])->fetch(PDO::FETCH_ASSOC);
+        return true;
+    }
 }
 ?>

@@ -8,7 +8,7 @@ class Login extends Controller {
         {
             $uname = $this->xss->getPostValue("username");
             $pass = $this->xss->getPostValue("password");
-            if(!NoCSRF::check('csrf_token', $_POST, true, 60*10)) return header("Location: ./login");
+            if(!NoCSRF::check('csrf_token', $_POST, 60*10)) return header("Location: ./login");
             $user = User::login($uname, $pass);
             if($user == 0) // si no pudo logear
             {

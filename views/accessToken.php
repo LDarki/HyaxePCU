@@ -16,18 +16,16 @@
     <div class="col-12 col-lg-3 offset-lg-9 panel h-100 py-5">
       <div class="card">
         <h1 class="card-title text-center mb-4">Inicia sesión</h1>
-        <form action="/HyaxePCU/login" method="post" class="card-body">
+        <form action="/HyaxePCU/accessToken" method="post" class="card-body">
           <div class="form-group">
             <input type="text" name="username" class="form-control" placeholder="Nombre de Usuario" required>
           </div>
           <input type="hidden" name="csrf_token" value="<?=$data["csrfToken"]?>">
-          <div class="form-group">
-            <input type="password" name="password" class="form-control" placeholder="Contraseña o Token" required>
-          </div>
           <div class="form-group text-center pt-4">
-            <input type="submit" value="Iniciar sesión" class="btn btn-primary w-100">
+            <input type="submit" value="Obtener Token" class="btn btn-primary w-100">
           </div>
-          <a href="./accessToken">Olvidaste tu contraseña?</a>
+          <p>Nota: El token de acceso se enviará al EMail del usuario.</p>
+          <a href="./login">Ya tienes un token?</a>
         </form>
       </div>
 </div>
