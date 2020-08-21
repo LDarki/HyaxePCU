@@ -8,6 +8,10 @@ require_once './app/classes/Hash.php';
 require_once './app/models/User.php';
 require_once './app/models/Announcements.php';
 
+include_once './app/classes/phpMailer/PHPMailer.php';
+include_once './app/classes/phpMailer/SMTP.php';
+include_once './app/classes/phpMailer/Exception.php';
+
 class Controller {
     public $xss;
 

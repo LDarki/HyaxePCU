@@ -23,4 +23,8 @@ const Notification = {
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => Notification.init());
+document.addEventListener("DOMContentLoaded", () => 
+{
+  Notification.init()
+}
+);

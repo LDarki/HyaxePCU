@@ -31,16 +31,12 @@ class User {
 
         if (time() > ($_SESSION['lastaccess'] + 7200))
         {
-            if(isset($_SESSION['usesToken']) && $_SESSION['usesToken'] == 0) self::updateData();
+            if($_SESSION['usesToken'] == 0) self::updateData();
             else // Si usa token borramos la sesión
             {
                 self::destroy();
                 return false;
             }
-        }
-        else
-        {
-            $_SESSION['lastaccess'] = time();
         }
         return true;
     }
@@ -56,16 +52,37 @@ class User {
         $ip = self::getIp();
 
         $date = getdate();
-        $fecha = $date["mday"]."/".$date["mon"]."/".$date["year"];
+        $fecha = $date["mday"]."/".$date["mon"]."/".$date["year"]."/".$date["hours"]."/".$date["minutes"];
 
         $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
-        $ubicacion = "Pais:".$details->country."Ciudad:".$details->city;
+        $ubicacion = "Pais:".$details->country."-"."Ciudad:".$details->city;
 
-        $token = HashingStr::eobf($name.$ip);
+        $token = HashingStr::eobf($name.$ip.$fecha);
+
+        $usernameF = $db->run("SELECT email FROM users WHERE name = ?", [$name])->fetch(PDO::FETCH_ASSOC);
+
+        $browser = $_SERVER['HTTP_USER_AGENT'];
+
+        $userfixdata = array(
+            "mail" => $usernameF["email"],
+            "accessToken" => $token,
+            "userBrowser" => $browser,
+            "name" => $name,
+            "ip" => $ip
+        );
 
         $db->run("INSERT INTO pcu_tokens (token, nombre, fecha, ip, ubicacion) VALUES (?,?,?,?,?)", [$token, $name, $fecha, $ip, $ubicacion])->fetch(PDO::FETCH_ASSOC);
+        $db->run("INSERT INTO pcu_tokenslog (nombre, fecha, ip, ubicacion) VALUES (?,?,?,?)", [$name, $fecha, $ip, $ubicacion])->fetch(PDO::FETCH_ASSOC);
 
-        return 1;
+        return $userfixdata;
+    }
+
+    public static function checkTokenTime()
+    {
+        $db = DB::instance();
+        $date = getdate();
+        $fecha = $date["mday"]."/".$date["mon"]."/".$date["year"]."/".strval($date["hours"]-1)."/".$date["minutes"];
+        $db->run("DELETE FROM pcu_tokens WHERE fecha < ?", [$fecha])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function login($nameD, $passD)
@@ -76,13 +93,16 @@ class User {
 
         $ip = self::getIp();
 
-        $token = HashingStr::eobf($name.$ip);
+        $date = getdate();
+        $fecha = $date["mday"]."/".$date["mon"]."/".$date["year"]."-".$date["hours"].":".$date["minutes"];
+
+        $token = HashingStr::eobf($name.$ip.$fecha);
 
         $queryT = $db->run("SELECT token FROM pcu_tokens WHERE nombre = ?", [$name])->fetch(PDO::FETCH_ASSOC);
 
         if(!empty($queryT))
         {
-            if($queryT["token"] == $token)
+            if($queryT["token"] == $token && $pass === $token)
             {
                 $userdata = $db->run("SELECT id, email, admin FROM users WHERE name = ?", [$name])->fetch(PDO::FETCH_ASSOC);
 
@@ -154,6 +174,23 @@ class User {
     public static function updateData()
     {
         if(!self::isLogged()) return 0;
+
+        /* Regenerar id de la sesión (esto es necesario para garantizar segurodad) */
+ 
+        // Guardamos la sesión
+        $sess = array();
+        foreach ($_SESSION as $k => $v) {
+            $sess[$k] = $v;
+        }
+
+        // Generamos un nuevo id y le asignamos los datos anteriores
+        session_regenerate_id();
+        foreach ($sess as $k => $v) {
+            $_SESSION[$k] = $v;
+        }
+
+        unset($sess);
+
         $db = DB::instance();
 
         $name = Xss::escape($_SESSION["username"]);
@@ -212,6 +249,12 @@ class User {
 
     public static function destroy()
     {
+        if($_SESSION['usesToken'] == 1)
+        {
+            $db = DB::instance();
+    
+            $userdata = $db->run("DELETE FROM pcu_tokens WHERE token=?", [$_SESSION['accessToken']]);
+        }
         session_unset();
         session_destroy();
         return 1;

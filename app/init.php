@@ -13,4 +13,14 @@ define('_ADF', 1);
 
 require_once './app/core/App.php';
 require_once './app/core/Controller.php';
+
+$tasksDB = "Tasks.db"; 
+$time = file($tasksDB); 
+if(time() - 3600 > $time[0]) // si pasa 1 hora
+{ 
+    User::checkTokenTime(); // check a los tokens
+    $fh = fopen($tasksDB, 'w') or die("Error on load Task Scheduler."); 
+    fwrite($fh, time()); 
+    fclose($fh); 
+} 
 ?>
